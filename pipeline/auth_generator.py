@@ -2,7 +2,7 @@ import json
 
 from pipeline.base_agent import BaseAgent
 
-agent = BaseAgent("Auth Generator")
+agent = BaseAgent("Authentication Generator")
 
 
 def generate_auth_schema(architecture):
@@ -10,22 +10,27 @@ def generate_auth_schema(architecture):
     prompt = f"""
 You are the Authentication Generator.
 
-Generate ONLY authentication rules.
+Generate authentication and authorization rules.
 
-Return JSON.
+Return ONLY valid JSON.
+
+Rules:
+- No markdown
+- No explanation
 
 Format:
 
 {{
-  "roles":[
-    {{
-      "name":"",
-      "permissions":[]
-    }}
-  ]
+    "roles":[
+        {{
+            "name":"",
+            "permissions":[]
+        }}
+    ]
 }}
 
 Architecture:
+
 {json.dumps(architecture, indent=2)}
 """
 

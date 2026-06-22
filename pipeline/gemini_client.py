@@ -1,33 +1,55 @@
-import os
 import time
-from dotenv import load_dotenv
+
 from google import genai
 
-load_dotenv()
+from config import (
+    GEMINI_API_KEY,
+    MODEL_NAME,
+    MAX_RETRIES,
+    RETRY_DELAY,
+    DEBUG,
+)
 
-client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+if not GEMINI_API_KEY:
+    raise ValueError("GEMINI_API_KEY not found.")
+
+client = genai.Client(api_key=GEMINI_API_KEY)
 
 
-def generate(prompt):
+def generate(prompt: str):
 
-    retries = 3
+    last_exception = None
 
-    for attempt in range(retries):
+    for attempt in range(1, MAX_RETRIES + 1):
 
         try:
 
+            if DEBUG:
+                print(f"\n🔹 Gemini Request ({attempt}/{MAX_RETRIES})")
+                print(f"Model : {MODEL_NAME}")
+
             response = client.models.generate_content(
-                model="gemini-3.5-flash",
-                contents=prompt
+                model=MODEL_NAME,
+                contents=prompt,
             )
 
-            return response.text
+            text = response.text
+
+            if not text:
+                raise Exception("Empty response from Gemini.")
+
+            return text.strip()
 
         except Exception as e:
 
-            print(f"Retry {attempt+1}/{retries}")
+            last_exception = e
 
-            if attempt == retries - 1:
-                raise e
+            print(f"⚠ {e}")
 
-            time.sleep(5)
+            if attempt < MAX_RETRIES:
+
+                print(f"Retrying in {RETRY_DELAY} seconds...")
+
+                time.sleep(RETRY_DELAY)
+
+    raise last_exception

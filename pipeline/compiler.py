@@ -10,24 +10,46 @@ def compile_application(user_prompt):
 
     result = {}
 
+    print("\n==============================")
     print("Stage 1 : Intent Extraction")
+    print("==============================")
+
     intent = extract_intent(user_prompt)
     result["intent"] = intent
 
+    print("\n==============================")
     print("Stage 2 : Architecture")
+    print("==============================")
+
     architecture = generate_architecture(intent)
     result["architecture"] = architecture
 
-    print("Stage 3 : UI")
-    result["ui"] = generate_ui_schema(architecture)
+    print("\n==============================")
+    print("Stage 3 : UI Schema")
+    print("==============================")
 
-    print("Stage 4 : API")
-    result["api"] = generate_api_schema(architecture)
+    ui = generate_ui_schema(architecture)
+    result["ui"] = ui
 
-    print("Stage 5 : Database")
-    result["database"] = generate_db_schema(architecture)
+    print("\n==============================")
+    print("Stage 4 : API Schema")
+    print("==============================")
 
-    print("Stage 6 : Authentication")
-    result["auth"] = generate_auth_schema(architecture)
+    api = generate_api_schema(architecture)
+    result["api"] = api
+
+    print("\n==============================")
+    print("Stage 5 : Database Schema")
+    print("==============================")
+
+    database = generate_db_schema(architecture)
+    result["database"] = database
+
+    print("\n==============================")
+    print("Stage 6 : Authentication Schema")
+    print("==============================")
+
+    auth = generate_auth_schema(architecture)
+    result["auth"] = auth
 
     return result

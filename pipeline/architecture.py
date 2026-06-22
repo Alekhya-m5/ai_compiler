@@ -16,17 +16,17 @@ Your ONLY responsibility is to design the software architecture.
 Return ONLY valid JSON.
 
 Rules:
-- No markdown.
-- No explanation.
-- entities must be a list of strings.
-- pages must be a list of strings.
-- flows must be a list of strings.
-- relationships must contain:
+- No markdown
+- No explanations
+- entities must be a list of strings
+- pages must be a list of strings
+- flows must be a list of strings
+- relationships must contain ONLY:
   - from_entity
   - to_entity
   - relation_type
 
-Return exactly this format:
+Return EXACTLY this structure:
 
 {{
     "entities": [],
@@ -42,7 +42,6 @@ Return exactly this format:
 }}
 
 Intent:
-
 {json.dumps(intent, indent=2)}
 """
 

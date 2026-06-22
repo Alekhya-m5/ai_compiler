@@ -1,20 +1,17 @@
 import json
+
 from pipeline.gemini_client import generate
 
 
 class BaseAgent:
-    """
-    Base class for every AI agent in the compiler pipeline.
-    Handles:
-    - LLM call
-    - JSON parsing
-    - Error handling
-    """
 
     def __init__(self, stage_name):
+
         self.stage_name = stage_name
 
-    def execute(self, prompt: str):
+    def execute(self, prompt):
+
+        print(f"\n========== {self.stage_name} ==========\n")
 
         response = generate(prompt)
 
@@ -25,9 +22,13 @@ class BaseAgent:
         )
 
         try:
+
             return json.loads(response)
 
         except json.JSONDecodeError:
+
+            print(response)
+
             raise Exception(
-                f"{self.stage_name} returned invalid JSON.\n\nResponse:\n{response}"
+                f"{self.stage_name} produced invalid JSON."
             )

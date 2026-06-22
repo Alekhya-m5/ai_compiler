@@ -8,23 +8,26 @@ agent = BaseAgent("UI Generator")
 def generate_ui_schema(architecture):
 
     prompt = f"""
-You are the UI Schema Generator.
+You are the UI Generator.
 
-Generate ONLY valid JSON.
+Generate ONLY the UI schema.
 
-Return exactly this structure:
+Return JSON.
+
+Format:
 
 {{
-  "pages":[
-    {{
-      "name":"",
-      "route":"",
-      "components":[]
-    }}
-  ]
+    "pages":[
+        {{
+            "name":"",
+            "route":"",
+            "components":[]
+        }}
+    ]
 }}
 
 Architecture:
+
 {json.dumps(architecture, indent=2)}
 """
 

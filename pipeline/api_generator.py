@@ -8,26 +8,31 @@ agent = BaseAgent("API Generator")
 def generate_api_schema(architecture):
 
     prompt = f"""
-You are the API Generator.
+You are the API Generator of an AI Software Compiler.
 
 Generate REST API endpoints.
 
 Return ONLY valid JSON.
 
+Rules:
+- No markdown
+- No explanation
+
 Format:
 
 {{
-  "endpoints":[
-    {{
-      "path":"",
-      "method":"",
-      "request":[],
-      "response":[]
-    }}
-  ]
+    "endpoints":[
+        {{
+            "path":"",
+            "method":"",
+            "request":[],
+            "response":[]
+        }}
+    ]
 }}
 
 Architecture:
+
 {json.dumps(architecture, indent=2)}
 """
 
