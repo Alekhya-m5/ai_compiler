@@ -1,0 +1,27 @@
+{
+  "normal": [
+    "Build a CRM with login, dashboard and contacts",
+    "Build a Hospital Management System",
+    "Build a Library Management System",
+    "Build an Inventory Management System",
+    "Build a Hotel Booking Platform",
+    "Build a School Management System",
+    "Build a Restaurant Ordering System",
+    "Build a Gym Management App",
+    "Build a Finance Tracking App",
+    "Build an HR Management Portal"
+  ],
+
+  "edge_cases": [
+    "Build app",
+    "Need payments without users",
+    "Login without authentication",
+    "Only admin role",
+    "Only guest users",
+    "Dashboard without data",
+    "No database required",
+    "Conflicting permissions",
+    "Incomplete CRM",
+    "Something like Salesforce"
+  ]
+}
