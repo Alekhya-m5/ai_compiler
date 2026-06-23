@@ -1,6 +1,7 @@
 import json
 
 from pipeline.base_agent import BaseAgent
+from schemas.ui_schema import UISchema
 
 agent = BaseAgent("UI Generator")
 
@@ -30,5 +31,6 @@ Architecture:
 
 {json.dumps(architecture, indent=2)}
 """
-
-    return agent.execute(prompt)
+    data = agent.execute(prompt)
+    validated = UISchema(**data)
+    return validated.model_dump() 

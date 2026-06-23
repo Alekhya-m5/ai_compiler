@@ -11,4 +11,4 @@ role-based access.
 
 result = compile_application(prompt)
 
-print(json.dumps(result, indent=4))
+# print(json.dumps(result, indent=4))

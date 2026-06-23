@@ -1,6 +1,8 @@
 import json
 
 from pipeline.base_agent import BaseAgent
+from schemas.intent_schema import IntentSchema
+
 
 agent = BaseAgent("Intent Extraction")
 
@@ -30,4 +32,8 @@ User Request:
 {user_prompt}
 """
 
-    return agent.execute(prompt)
+    data = agent.execute(prompt)
+
+    validated = IntentSchema(**data)
+
+    return validated.model_dump()

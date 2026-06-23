@@ -1,7 +1,7 @@
 import json
 
 from pipeline.base_agent import BaseAgent
-from schemas.app_schema import ArchitectureSchema
+from schemas.architecture_schema import ArchitectureSchema
 
 agent = BaseAgent("Architecture Generator")
 

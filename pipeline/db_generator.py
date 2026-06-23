@@ -1,6 +1,7 @@
 import json
 
 from pipeline.base_agent import BaseAgent
+from schemas.db_schema import DBSchema
 
 agent = BaseAgent("Database Generator")
 
@@ -34,4 +35,9 @@ Architecture:
 {json.dumps(architecture, indent=2)}
 """
 
-    return agent.execute(prompt)
+    
+    data = agent.execute(prompt)
+
+    validated = DBSchema(**data)
+
+    return validated.model_dump()
