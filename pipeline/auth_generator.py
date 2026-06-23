@@ -2,33 +2,49 @@ import json
 
 from pipeline.base_agent import BaseAgent
 from schemas.auth_schema import AuthSchema
+from config import USE_MOCK_GENERATORS
+
 
 agent = BaseAgent("Authentication Generator")
 
 
 def generate_auth_schema(architecture):
+    if USE_MOCK_GENERATORS:
 
-    prompt = f"""
-You are the Authentication Generator.
+        return {
+            "roles": [
+                {
+                    "name": "Admin",
+                    "permissions": [
+                        "read",
+                        "write"
+                    ]
+                }
+            ]
+        }
 
-Generate authentication and authorization rules.
+    else:
+        prompt = f"""
+    You are the Authentication Generator.
 
-Return ONLY valid JSON.
+    Generate authentication and authorization rules.
 
-Rules:
-- No markdown
-- No explanation
+    Return ONLY valid JSON.
 
-Format:
+    Rules:
+    - No markdown
+    - No explanation
 
-{{
-    "roles":[
-        {{
-            "name":"",
-            "permissions":[]
-        }}
-    ]
-}}
+    Format:
+
+    {{
+        "roles":[
+            {{
+                "name":"",
+                "permissions":[]
+            }}
+        ]
+    }}
 
 Architecture:
 

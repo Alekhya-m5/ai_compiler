@@ -2,33 +2,49 @@ import json
 
 from pipeline.base_agent import BaseAgent
 from schemas.db_schema import DBSchema
+from config import USE_MOCK_GENERATORS
 
 agent = BaseAgent("Database Generator")
 
 
 def generate_db_schema(architecture):
+    if USE_MOCK_GENERATORS:
 
-    prompt = f"""
-You are the Database Schema Generator.
+        return {
+            "tables": [
+                {
+                    "name": "User",
+                    "columns": [
+                        "id",
+                        "email",
+                        "password"
+                    ]
+                }
+            ]
+        }
+    
+    else:
+        prompt = f"""
+    are the Database Schema Generator.
 
-Generate ONLY the database schema.
+    rate ONLY the database schema.
 
-Return ONLY valid JSON.
+    rn ONLY valid JSON.
 
-Rules:
-- No markdown
-- No explanation
+    Rules:
+    - No markdown
+    - No explanation
 
-Format:
+    Format:
 
-{{
-    "tables":[
-        {{
-            "name":"",
-            "columns":[]
-        }}
-    ]
-}}
+    {{
+        "tables":[
+            {{
+                "name":"",
+                "columns":[]
+            }}
+        ]
+    }}
 
 Architecture:
 

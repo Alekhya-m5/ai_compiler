@@ -2,35 +2,47 @@ import json
 
 from pipeline.base_agent import BaseAgent
 from schemas.api_schema import APISchema
+from config import USE_MOCK_GENERATORS
 
 agent = BaseAgent("API Generator")
 
 
 def generate_api_schema(architecture):
+    if USE_MOCK_GENERATORS:
 
-    prompt = f"""
-You are the API Generator of an AI Software Compiler.
+        return {
+            "endpoints": [
+                {
+                    "path": "/dashboard",
+                    "method": "GET"
+                }
+            ]
+        }
+    else:
 
-Generate REST API endpoints.
+            prompt = f"""
+            You are the API Generator of an AI Software Compiler.
 
-Return ONLY valid JSON.
+            Generate REST API endpoints.
 
-Rules:
-- No markdown
-- No explanation
+            Return ONLY valid JSON.
 
-Format:
+            Rules:
+            - No markdown
+            - No explanation
 
-{{
-    "endpoints":[
+        Format:
+
         {{
-            "path":"",
-            "method":"",
-            "request":[],
-            "response":[]
+        "endpoints":[
+            {{
+                "path":"",
+                "method":"",
+                "request":[],
+                "response":[]
+            }}
+        ]
         }}
-    ]
-}}
 
 Architecture:
 

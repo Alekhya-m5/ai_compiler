@@ -2,30 +2,47 @@ import json
 
 from pipeline.base_agent import BaseAgent
 from schemas.ui_schema import UISchema
+from config import USE_MOCK_GENERATORS
 
 agent = BaseAgent("UI Generator")
 
 
 def generate_ui_schema(architecture):
+    
+    if USE_MOCK_GENERATORS:
 
-    prompt = f"""
-You are the UI Generator.
+        return {
+            "pages": [
+                {
+                    "name": "Dashboard",
+                    "route": "/dashboard",
+                    "components": [
+                        "Navbar",
+                        "Table"
+                    ]
+                }
+            ]
+        }
 
-Generate ONLY the UI schema.
+    else:
+        prompt = f"""
+        You are the UI Generator.
 
-Return JSON.
+        Generate ONLY the UI schema.
 
-Format:
+        Return JSON.
 
-{{
-    "pages":[
-        {{
-            "name":"",
-            "route":"",
-            "components":[]
-        }}
-    ]
-}}
+    Format:
+
+    {{
+        "pages":[
+            {{
+                "name":"",
+                "route":"",
+                "components":[]
+            }}
+        ]
+    }}
 
 Architecture:
 

@@ -24,3 +24,5 @@ RETRY_DELAY = 5
 # ==========================
 
 DEBUG = True
+
+USE_MOCK_GENERATORS = True
