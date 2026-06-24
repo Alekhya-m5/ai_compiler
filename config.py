@@ -4,12 +4,12 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # ==========================
-# Gemini Configuration
+# LLM Configuration
 # ==========================
 
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
-MODEL_NAME =  "gemini-flash-latest"
+MODEL_NAME = "llama-3.3-70b-versatile"
 
 # ==========================
 # Retry Configuration
@@ -25,4 +25,8 @@ RETRY_DELAY = 5
 
 DEBUG = True
 
-USE_MOCK_GENERATORS = True
+# ==========================
+# Mock Mode
+# ==========================
+
+USE_MOCK_GENERATORS = False

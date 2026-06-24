@@ -22,17 +22,23 @@ with st.sidebar:
 
     st.markdown("### Pipeline Status")
 
-    st.success("Intent Agent")
-    st.success("Architecture Agent")
-    st.success("UI Generator")
-    st.success("API Generator")
-    st.success("DB Generator")
-    st.success("Auth Generator")
-    st.success("Validator")
-    st.success("Repair Engine")
-    st.success("Runtime")
+    intent_status = st.empty()
+    arch_status = st.empty()
+    ui_status = st.empty()
+    api_status = st.empty()
+    db_status = st.empty()
+    auth_status = st.empty()
+    val_status = st.empty()
+    runtime_status = st.empty()
 
-    st.markdown("---")
+    intent_status.info("⏳ Intent Agent")
+    arch_status.info("⏳ Architecture Agent")
+    ui_status.info("⏳ UI Generator")
+    api_status.info("⏳ API Generator")
+    db_status.info("⏳ DB Generator")
+    auth_status.info("⏳ Auth Generator")
+    val_status.info("⏳ Validator")
+    runtime_status.info("⏳ Runtime")
 
     st.info(
         "Natural Language ➜ Structured Application"
@@ -114,27 +120,52 @@ if st.button(
 
     progress = st.progress(0)
 
-    progress.progress(10)
-    progress.progress(30)
-    progress.progress(50)
-    progress.progress(70)
-    progress.progress(90)
-    progress.progress(100)
-
-    st.success("Compilation Complete")
-
-    # ======================================
-    # DATA
-    # ======================================
-
-    result = compile_application(prompt)
-
     try:
+
+        # Stage 1
+        intent_status.info("🔄 Running Intent Agent")
+        progress.progress(10)
+
+        status = st.empty()
+
+        status.info("Running AI Compiler...")
+
         result = compile_application(prompt)
+        
+        status.success("Compilation Complete")
+
+        # Mark all stages completed
+        intent_status.success("✅ Intent Agent")
+        progress.progress(20)
+
+        arch_status.success("✅ Architecture Agent")
+        progress.progress(35)
+
+        ui_status.success("✅ UI Generator")
+        progress.progress(50)
+
+        api_status.success("✅ API Generator")
+        progress.progress(65)
+
+        db_status.success("✅ DB Generator")
+        progress.progress(75)
+
+        auth_status.success("✅ Auth Generator")
+        progress.progress(85)
+
+        val_status.success("✅ Validator")
+        progress.progress(95)
+
+        runtime_status.success("✅ Runtime")
+        progress.progress(100)
+
+        st.success("Compilation Complete")
 
     except Exception as e:
+
         st.error(f"Compilation Failed: {e}")
         st.stop()
+
     # ======================================
     # SUMMARY
     # ======================================
@@ -187,12 +218,8 @@ if st.button(
         ]
     )
 
-    # INTENT
-
     with tab1:
         st.json(result["intent"])
-
-    # ARCHITECTURE
 
     with tab2:
 
@@ -209,9 +236,7 @@ if st.button(
             graph.node(entity)
 
         if len(entities) > 1:
-
             for i in range(len(entities) - 1):
-
                 graph.edge(
                     entities[i],
                     entities[i + 1]
@@ -219,27 +244,17 @@ if st.button(
 
         st.graphviz_chart(graph)
 
-    # UI
-
     with tab3:
         st.json(result["ui"])
-
-    # API
 
     with tab4:
         st.json(result["api"])
 
-    # DATABASE
-
     with tab5:
         st.json(result["database"])
 
-    # AUTH
-
     with tab6:
         st.json(result["auth"])
-
-    # VALIDATION
 
     with tab7:
 
@@ -247,8 +262,6 @@ if st.button(
             st.success("Validation Passed")
         else:
             st.error(result["validation_errors"])
-
-    # RUNTIME
 
     with tab8:
 
@@ -260,10 +273,10 @@ if st.button(
                 result["runtime"],
                 indent=4
             ),
-            file_name="runtime.json"
+            file_name="runtime.json",
+            key="runtime_download"
         )
 
-    # REPAIR
 
     with tab9:
 
@@ -276,6 +289,7 @@ if st.button(
 
         st.json(repair)
 
+   
 # ======================================
 # FOOTER
 # ======================================

@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Any
 from pydantic import BaseModel
 
 
@@ -7,9 +7,9 @@ class Endpoint(BaseModel):
 
     method: str
 
-    request: List[str]
+    request: List[Any]
 
-    response: List[str]
+    response: List[Any]
 
 
 class APISchema(BaseModel):

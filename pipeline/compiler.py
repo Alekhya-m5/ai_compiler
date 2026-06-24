@@ -42,9 +42,10 @@ def compile_application(user_prompt):
     errors,
     result
     )
-
+    print("Stage 8 : Repair")
     result["repair"] = repair_result
 
+    print("Stage 9 : Runtime")
     runtime_result = generate_runtime(result)
 
     result["runtime"] = runtime_result
