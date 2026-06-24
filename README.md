@@ -110,6 +110,12 @@ ai_compiler/
 |   ├── db_schema.py 
 |   └── auth_schema.py
 |
+|__ evalution/
+|    ├──metrics.py
+|    └──prompts.json
+|
+|── generated/
+|   └── Generated schemas and runtime outputs
 │
 ├── screenshots/
 │
