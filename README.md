@@ -104,7 +104,12 @@ ai_compiler/
 │   └── compiler.py
 │
 ├── schemas/
-│   └── app_schema.py
+|   ├── intent_schema.py 
+|   ├── ui_schema.py   
+|   ├── api_schema.py 
+|   ├── db_schema.py 
+|   └── auth_schema.py
+|
 │
 ├── screenshots/
 │
@@ -150,11 +155,6 @@ Create a `.env` file:
 GROQ_API_KEY=your_api_key
 ```
 
-or
-
-```env
-GEMINI_API_KEY=your_api_key
-```
 
 ---
 
